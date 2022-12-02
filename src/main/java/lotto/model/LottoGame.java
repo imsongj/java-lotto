@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
     private final List<Lotto> tickets;
@@ -20,5 +21,12 @@ public class LottoGame {
 
     public int calculateNumberOfLotto(long money) {
         return (int)(money / LottoStatistic.PRICE.getValue());
+    }
+
+    public List<String> convertTicketsToString() {
+        return tickets
+                .stream()
+                .map(Lotto::toString)
+                .collect(Collectors.toList());
     }
 }

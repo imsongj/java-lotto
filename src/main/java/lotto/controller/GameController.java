@@ -1,9 +1,9 @@
 package lotto.controller;
 
+import lotto.model.LottoGame;
 import lotto.model.LottoStatistic;
-import lotto.model.Validator;
+import lotto.model.StringValidator;
 import lotto.view.ErrorMessage;
-import lotto.view.GameMessage;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,18 +17,19 @@ public class GameController {
     }
 
     public void start() {
+        LottoGame lottoGame = new LottoGame();
         try {
-            getMoney();
+            lottoGame.buyLotto(getMoney());
+            outputView.printLottoTickets(lottoGame.convertTicketsToString());
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
         }
     }
 
     public long getMoney() {
-        outputView.printMessage(GameMessage.ASK_MONEY);
-        String input = inputView.readInput();
+        String input = inputView.readMoneyInput();
         try {
-            Validator.validateMoney(input);
+            StringValidator.validateMoney(input);
             return Long.parseLong(input);
         } catch (IllegalArgumentException exception) {
             outputView.printError(ErrorMessage.INVALID_MONEY, LottoStatistic.PRICE.getValue());

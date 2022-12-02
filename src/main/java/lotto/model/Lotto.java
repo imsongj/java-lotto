@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -11,10 +13,13 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != LottoStatistic.SIZE.getValue()) {
-            throw new IllegalArgumentException();
-        }
+        ListValidator.validateSize(numbers);
+        ListValidator.validateDuplicate(numbers);
     }
 
-    // TODO: 추가 기능 구현
+    public String toString() {
+        List<Integer> sortedNumbers = new ArrayList<>(numbers);
+        Collections.sort(sortedNumbers);
+        return sortedNumbers.toString();
+    }
 }

@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.regex.Pattern;
 
-public class Validator {
+public class StringValidator {
     private static final String MONEY_PATTERN = "^[0-9]*$";
 
     public static void validateMoney(String input) {
@@ -26,6 +26,4 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
-
-    public static void validateSize(){}
 }
