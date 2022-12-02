@@ -26,4 +26,6 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateSize(){}
 }
