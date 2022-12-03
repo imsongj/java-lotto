@@ -14,16 +14,16 @@ public class ListValidatorTest {
     @ParameterizedTest
     @MethodSource("provideParametersForSize")
     @DisplayName("리스트 사이즈가 6 이상이면 예외를 발생시킨다.")
-    void throwExceptionForSize(List<Integer> numbers) {
-        assertThatThrownBy(() -> ListValidator.validateSize(numbers))
+    void throwExceptionForSize(List<Integer> numbers, int size) {
+        assertThatThrownBy(() -> ListValidator.validateSize(numbers, size))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> provideParametersForSize() {
         return Stream.of(
-                Arguments.of(List.of(1, 2, 0, 3, 4)),
-                Arguments.of(List.of()),
-                Arguments.of(List.of(-1, 2, 0, 2, 3, 6, 7, 8))
+                Arguments.of(List.of(1, 2, 0, 3, 4), 6),
+                Arguments.of(List.of(), 6),
+                Arguments.of(List.of(-1, 2, 0, 2, 3, 6, 7, 8), 6)
         );
     }
 
@@ -40,6 +40,23 @@ public class ListValidatorTest {
                 Arguments.of(List.of(1, 1)),
                 Arguments.of(List.of(1,2,3,4,5,5)),
                 Arguments.of(List.of(3,3,3,3,3,3))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideParametersForWinningNumbers")
+    @DisplayName("잘못된 당첨 번호와 보너스 번호가 입력되면 예외를 발생시킨다.")
+    void throwExceptionForInvalidWinning(List<Integer> winningNumbers, int bonus) {
+        assertThatThrownBy(() -> ListValidator.validateWinningNumbers(winningNumbers, bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> provideParametersForWinningNumbers() {
+        return Stream.of(
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7, 8), 6),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7, 8), 46),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 7, 46), 8)
         );
     }
 }

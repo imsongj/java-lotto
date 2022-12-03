@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.model.LottoGame;
 import lotto.model.LottoStatistic;
+import lotto.model.Result;
 import lotto.model.StringValidator;
 import lotto.view.ErrorMessage;
 import lotto.view.InputView;
@@ -24,7 +25,7 @@ public class GameController {
     public void start() {
         LottoGame lottoGame = new LottoGame();
         buyLotto(lottoGame);
-        getWinningNumbers();
+        calculateResult(lottoGame);
     }
     public void buyLotto(LottoGame lottoGame) {
         try {
@@ -43,8 +44,9 @@ public class GameController {
         return Long.parseLong(input);
     }
 
-    public void getPlayerInput(LottoGame lottoGame) {
+    public void calculateResult(LottoGame lottoGame) {
         try {
+            Result result = lottoGame.getResult(getWinningNumbers(), getBonus());
 
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();

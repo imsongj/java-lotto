@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
     private final List<Lotto> tickets;
-    private final Referee referee;
 
     public LottoGame() {
         tickets = new ArrayList<>();
-        referee = new Referee();
     }
 
     public void buyLotto(long money) {
@@ -21,6 +19,19 @@ public class LottoGame {
 
     public int calculateNumberOfLotto(long money) {
         return (int)(money / LottoStatistic.PRICE.getValue());
+    }
+
+    public Result getResult(List<Integer> winningNumbers, int bonus) {
+        ListValidator.validateWinningNumbers(winningNumbers, bonus);
+        return processTickets(winningNumbers, bonus);
+    }
+
+    public Result processTickets(List<Integer> winningNumbers, int bonus) {
+        Result result = new Result();
+        for (Lotto ticket : tickets) {
+            result.add(ticket.compare(winningNumbers, bonus));
+        }
+        return result;
     }
 
     public List<String> convertTicketsToString() {

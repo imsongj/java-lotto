@@ -17,4 +17,6 @@ public class LottoGameTest {
     void buyLotto(long money, int count) {
         assertThat(new LottoGame().calculateNumberOfLotto(money)).isEqualTo(count);
     }
+
+
 }

@@ -13,9 +13,21 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        ListValidator.validateSize(numbers);
+        ListValidator.validateSize(numbers, LottoStatistic.SIZE.getValue());
         ListValidator.validateDuplicate(numbers);
-        ListValidator.validateRange(numbers);
+        ListValidator.validateRange(numbers,
+                LottoStatistic.MIN_NUMBER.getValue(), LottoStatistic.MAX_NUMBER.getValue());
+    }
+
+    public Prize compare(List<Integer> winningNumbers, int bonus) {
+        int matchCount = 0;
+        boolean matchBonus = numbers.contains(bonus);
+        for (int number : winningNumbers) {
+            if (numbers.contains(number)) {
+                matchCount++;
+            }
+        }
+        return Prize.of(matchCount, matchBonus);
     }
 
     public String toString() {
