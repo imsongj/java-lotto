@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringValidator {

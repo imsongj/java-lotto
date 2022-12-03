@@ -17,8 +17,12 @@ public class OutputView {
         System.out.println(errorMessage.getMessage());
     }
 
-    public void printError(ErrorMessage errorMessage, int formatNumber) {
-        System.out.printf(errorMessage.getMessage() + NEW_LINE, formatNumber);
+    public void printMoneyError(ErrorMessage errorMessage, int price) {
+        System.out.printf(errorMessage.getMessage() + NEW_LINE, price);
+    }
+
+    public void printLottoNumberError(ErrorMessage errorMessage, int min, int max) {
+        System.out.printf(errorMessage.getMessage() + NEW_LINE, min, max);
     }
 
     public void printLottoTickets(List<String> tickets) {

@@ -17,4 +17,13 @@ public class ListValidator {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateRange(List<Integer> numbers) {
+        for (int number : numbers) {
+            if (number < LottoStatistic.MIN_NUMBER.getValue() || number > LottoStatistic.MAX_NUMBER.getValue()) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+    }
 }

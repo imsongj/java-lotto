@@ -13,4 +13,9 @@ public class InputView {
         outputView.printMessage(GameMessage.ASK_MONEY);
         return Console.readLine();
     }
+
+    public String readLottoNumbersInput() {
+        outputView.printMessage(GameMessage.ASK_LOTTO_NUMBER);
+        return Console.readLine();
+    }
 }
