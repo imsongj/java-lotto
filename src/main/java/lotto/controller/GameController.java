@@ -11,8 +11,10 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class GameController {
+    private static final String DELIMITER = ",";
     private final InputView inputView;
     private final OutputView outputView;
+
 
     public GameController() {
         inputView = new InputView();
@@ -22,7 +24,7 @@ public class GameController {
     public void start() {
         LottoGame lottoGame = new LottoGame();
         buyLotto(lottoGame);
-        getLottoNumbers();
+        getWinningNumbers();
     }
     public void buyLotto(LottoGame lottoGame) {
         try {
@@ -36,7 +38,8 @@ public class GameController {
 
     public long getMoney() {
         String input = inputView.readMoneyInput();
-        StringValidator.validateMoney(input);
+        StringValidator.validateNumeric(input);
+        StringValidator.validateDivisible(input, LottoStatistic.PRICE.getValue());
         return Long.parseLong(input);
     }
 
@@ -50,19 +53,19 @@ public class GameController {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<Integer> getWinningNumbers() {
         String input = inputView.readLottoNumbersInput();
-        try {
-            return convertStringToList(input);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public List<Integer> convertStringToList(String input) {
-        return Stream.of(input.split(","))
+        StringValidator.validateIntegerList(input, DELIMITER);
+        return Stream.of(input.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public int getBonus() {
+        String input = inputView.readBonusInput();
+        StringValidator.validateNumeric(input);
+        StringValidator.validateInteger(input);
+        return Integer.parseInt(input);
     }
 }

@@ -26,7 +26,6 @@ public class OutputView {
     }
 
     public void printLottoTickets(List<String> tickets) {
-        printEmptyLine();
         printMessage(GameMessage.PURCHASE, tickets.size());
         for (String ticket : tickets) {
             System.out.println(ticket);

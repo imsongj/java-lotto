@@ -18,4 +18,9 @@ public class InputView {
         outputView.printMessage(GameMessage.ASK_LOTTO_NUMBER);
         return Console.readLine();
     }
+
+    public String readBonusInput() {
+        outputView.printMessage(GameMessage.ASK_BONUS);
+        return Console.readLine();
+    }
 }
