@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.List;
+import lotto.model.Result;
 
 public class OutputView {
     private static final String NEW_LINE = "%n";
@@ -30,6 +31,10 @@ public class OutputView {
         for (String ticket : tickets) {
             System.out.println(ticket);
         }
+    }
+
+    public void printResult(Result result) {
+
     }
 
     public void printEmptyLine() {

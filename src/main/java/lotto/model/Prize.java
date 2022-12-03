@@ -18,6 +18,10 @@ public enum Prize {
         this.prize = prize;
     }
 
+    public long getPrize() {
+        return prize;
+    }
+
     public static Prize of(int matchCount, boolean matchBonus) {
         if(matchCount != FIVE.matchCount) {
             matchBonus = false;

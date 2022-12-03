@@ -27,6 +27,7 @@ public class GameController {
         buyLotto(lottoGame);
         calculateResult(lottoGame);
     }
+
     public void buyLotto(LottoGame lottoGame) {
         try {
             lottoGame.buyLotto(getMoney());
@@ -37,22 +38,21 @@ public class GameController {
         }
     }
 
-    public long getMoney() {
-        String input = inputView.readMoneyInput();
-        StringValidator.validateNumeric(input);
-        StringValidator.validateDivisible(input, LottoStatistic.PRICE.getValue());
-        return Long.parseLong(input);
-    }
-
     public void calculateResult(LottoGame lottoGame) {
         try {
             Result result = lottoGame.getResult(getWinningNumbers(), getBonus());
-
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
             outputView.printLottoNumberError(ErrorMessage.INVALID_LOTTO_NUMBER,
                     LottoStatistic.MIN_NUMBER.getValue(), LottoStatistic.MAX_NUMBER.getValue());
         }
+    }
+
+    public long getMoney() {
+        String input = inputView.readMoneyInput();
+        StringValidator.validateNumeric(input);
+        StringValidator.validateDivisible(input, LottoStatistic.PRICE.getValue());
+        return Long.parseLong(input);
     }
 
     public List<Integer> getWinningNumbers() {
