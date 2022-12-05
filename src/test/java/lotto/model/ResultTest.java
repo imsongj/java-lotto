@@ -2,7 +2,6 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +36,6 @@ public class ResultTest {
         result.add(Prize.THREE);
         result.add(Prize.FOUR);
         result.add(Prize.FOUR);
-        assertThat(result.calculateProfitRate()).isEqualTo(40125.0);
+        assertThat(result.getProfitRate()).isEqualTo(40125.0);
     }
 }

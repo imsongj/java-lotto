@@ -34,6 +34,5 @@ public class ListValidator {
                 throw new IllegalArgumentException();
             }
         }
-
     }
 }

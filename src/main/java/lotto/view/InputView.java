@@ -14,8 +14,8 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String readLottoNumbersInput() {
-        outputView.printMessage(GameMessage.ASK_LOTTO_NUMBER);
+    public String readWinningNumbersInput() {
+        outputView.printMessage(GameMessage.ASK_WINNING_NUMBER);
         return Console.readLine();
     }
 

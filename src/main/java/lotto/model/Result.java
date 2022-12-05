@@ -1,16 +1,17 @@
 package lotto.model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Result {
     private static final int INITIAL_VALUE = 0;
     private static final int INCREMENT_VALUE = 1;
     public static final int RATE_MULTIPLIER = 100;
-    private final Map<Prize, Integer> prizeResult;
+
+    private final LinkedHashMap<Prize, Integer> prizeResult;
 
     public Result() {
-        prizeResult = new HashMap<>();
+        prizeResult = new LinkedHashMap<>();
         for (Prize prizeType : Prize.values()) {
             prizeResult.put(prizeType, INITIAL_VALUE);
         }
@@ -20,7 +21,11 @@ public class Result {
         prizeResult.merge(prizeType, INCREMENT_VALUE, Integer::sum);
     }
 
-    public double calculateProfitRate() {
+    public Map<Prize, Integer> getPrizeResult() {
+        return prizeResult;
+    }
+
+    public double getProfitRate() {
         return (double)calculateTotalPrize() / (calculateNumberOfTickets() * LottoStatistic.PRICE.getValue())
                 * RATE_MULTIPLIER;
     }

@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import lotto.model.LottoGame;
 import lotto.model.LottoStatistic;
 import lotto.model.Result;
@@ -13,6 +14,7 @@ import lotto.view.OutputView;
 
 public class GameController {
     private static final String DELIMITER = ",";
+
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -24,23 +26,28 @@ public class GameController {
 
     public void start() {
         LottoGame lottoGame = new LottoGame();
-        buyLotto(lottoGame);
-        calculateResult(lottoGame);
+        if (buyLotto(lottoGame)) {
+            calculateResult(lottoGame);
+        }
+
     }
 
-    public void buyLotto(LottoGame lottoGame) {
+    public boolean buyLotto(LottoGame lottoGame) {
         try {
             lottoGame.buyLotto(getMoney());
             outputView.printLottoTickets(lottoGame.convertTicketsToString());
+            return true;
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
             outputView.printMoneyError(ErrorMessage.INVALID_MONEY, LottoStatistic.PRICE.getValue());
+            return false;
         }
     }
 
     public void calculateResult(LottoGame lottoGame) {
         try {
             Result result = lottoGame.getResult(getWinningNumbers(), getBonus());
+            outputView.printResult(result);
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
             outputView.printLottoNumberError(ErrorMessage.INVALID_LOTTO_NUMBER,
@@ -56,7 +63,7 @@ public class GameController {
     }
 
     public List<Integer> getWinningNumbers() {
-        String input = inputView.readLottoNumbersInput();
+        String input = inputView.readWinningNumbersInput();
         StringValidator.validateIntegerList(input, DELIMITER);
         return Stream.of(input.split(DELIMITER))
                 .map(String::trim)

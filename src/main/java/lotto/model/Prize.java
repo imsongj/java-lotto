@@ -18,6 +18,14 @@ public enum Prize {
         this.prize = prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean getMatchBonus() {
+        return matchBonus;
+    }
+
     public long getPrize() {
         return prize;
     }
@@ -32,5 +40,9 @@ public enum Prize {
             }
         }
         return NOTHING;
+    }
+
+    public boolean isNothing() {
+        return this == NOTHING;
     }
 }

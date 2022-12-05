@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
